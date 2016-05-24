@@ -16,12 +16,21 @@ Developer Test
 ==============
 
 1.  What editor will you use to edit this file, and why?
+    I'll use the browser for Github.  These are relatively simple questions, so no need for the typeahead features of complex browsers.
+    
 2.  Some of the questions will ask for a solution in the language of
     your choice.  What language(s) will you choose, and why?
+    I'll use Python and .Net.  Python is my preferred language for simple scripting tasks.  I've used .Net for over 10 years in my current job.
+    
 3.  Explain the difference between testing and debugging.
+   Testing is when you have expected behavior and running the application either manually or through automation, to ensure that the application behaves the way it is expected to.  Debugging is what you do if you find that the application is not behaving as expected and you are trying to figure out the root cause.
+
 4.  Consider a user querying a search engine.  Describe, in as much
     detail as you like, what happens between the user clicking the
     "submit" button and the display of the results.
+    The web form submits the input from the user to a frontend web server.  Depending on the setup, that server then hands off the request to a search cluster which will do a variety of things depending on how advanced it is.  If the cluster is pretty advanced, then it will lemmatize the words and phrases, run some type of semantic algorithm to detect and correct misspellings, parse the query into concepts rather than purely keywords, and then augment the query with common synonyms of the words.  Once it has the best augmented query it can craft, the search engine will then look up the words and phrases in an inverted index to find the documents that actually match the query.  If the engine is advanced, it will likely do a two-step ranking process.  The first step in ranking will be a highly performant ranking algorithm such as TF/IDF.  The engine will over sample from this first step so that it could then a run a second pass algorithm likely trained through machine learning techniques to get the final ranking.
+    
+      The results will then be sent back to the user but not before all the relevant data has been logged for later review and possibly to be used in the training of even better learning algorithms.
 
 The two tables below describe relationships between employees,
 managers, and departments (the columns employee.mgr_id and
