@@ -20,7 +20,7 @@ Developer Test
     
 2.  Some of the questions will ask for a solution in the language of
     your choice.  What language(s) will you choose, and why?
-    I'll use Python and .Net.  Python is my preferred language for simple scripting tasks.  I've used .Net for over 10 years in my current job.
+    I'll use Python and C#.Net.  Python is my preferred language for simple scripting tasks.  I've used .Net for over 10 years in my current job.
     
 3.  Explain the difference between testing and debugging.
    Testing is when you have expected behavior and running the application either manually or through automation, to ensure that the application behaves the way it is expected to.  Debugging is what you do if you find that the application is not behaving as expected and you are trying to figure out the root cause.
@@ -146,7 +146,7 @@ employee                              department
          else:
             return null
       else:
-         midpoint = Math.floor(float(end - start) / 2)
+         midpoint = Math.floor(float(end - start) / 2.0)
          if arr[midpoint] == target:
             return midpoint
          else:
@@ -181,6 +181,7 @@ employee                              department
     from the file.
     
     # I would just use grep if I was doing this in the console
+    # needs error checking for the proper inputs
     import sys
     
     filename = sys.argv[1]
@@ -198,5 +199,55 @@ employee                              department
       print("Line not found")
     
 15. Write the function from question 12 in a different language.
+   public int binary_search(int[] arr, int target) {
+      return binary_search_worker(arr, target, 0, len(arr) - 1);
+   }
+            
+   public int binary_search_worker(int[] arr, int target, int start, int end) {
+      if (start == end) {
+         if (arr[start] == target) {
+            return = start;
+         } else {
+            return null;
+         }
+      } else {
+         midpoint = Math.floor(float(end - start) / 2.0);
+         if (arr[midpoint] == target) {
+            return midpoint;
+         } else {
+            if (midpoint > target) {
+               return binary_search_worker(arr, target, start, midpoint - 1);
+            } else {
+               return binary_search_worker(arr, target, midpoint + 1, end);
+            }
+    }
+
 16. Write the program from question 14 in a different language (it can
     be the same language you used for #15, but it doesn't have to be).
+    
+    public static void main(String [ ] args) {
+    	string filename = args[0];
+    	int n = args[1];
+    
+    	int cur_line_num = 0;
+    	bool line_found = false;
+	string line;
+
+	//https://msdn.microsoft.com/en-us/library/aa287535(v=vs.71).aspx
+	// Read the file and display it line by line.
+	System.IO.StreamReader file = new System.IO.StreamReader("c:\\test.txt");
+	while((line = file.ReadLine()) != null) {
+		if (cur_line_num == n) {
+   			Console.WriteLine (line);
+   			line_found = true;
+   			break;
+   		}
+   		cur_line_num++;
+	}
+
+	file.Close();
+
+    	if (!line_found) {
+      		Console.WriteLine("Line not found");
+      	}
+     }
