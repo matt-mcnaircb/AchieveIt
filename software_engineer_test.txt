@@ -82,8 +82,6 @@ employee                              department
     left outer join employee as t2
     on t1.mgr_id = t2.id
     
-    Used left outer join because not every employee has a manager.
-    
 8.  Write an SQL query to list the full name of every employee in the
     Sales department.
     Select name from employee where mgr_id = 15
@@ -113,13 +111,92 @@ employee                              department
     
 11. Write a function in the language of your choice that implements
     quicksort on an array of integers.
+    # https://en.wikipedia.org/wiki/Quicksort
+    
+    def quicksort(arr, low, high):
+      if low < high:
+         p = partition(arr, low, high)
+         quicksort(p, low, p-1)
+         quicksort(p, p+1, high)
+         
+   def partition(arr, low, high):
+      pivot = arr[high]
+      i = low
+      for j in range(low, high-1):
+         if arr[j] <= pivot:
+            tmp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = tmp
+            i += 1
+      tmp = arr[i]
+      arr[i] = arr[high]
+      arr[high] = tmp
+      return i
+    
 12. Write a function in the language of your choice that performs
     binary search on a sorted array of integers.
+    #https://en.wikipedia.org/wiki/Binary_search_algorithm
+    def binary_search(arr, target)
+      return binary_search_worker(arr, target, 0, len(arr) - 1)
+            
+   def binary_search_worker(arr, target, start, end):
+      if start == end:
+         if arr[start] == target:
+            return = start
+         else:
+            return null
+      else:
+         midpoint = Math.floor(float(end - start) / 2)
+         if arr[midpoint] == target:
+            return midpoint
+         else:
+            if midpoint > target:
+               return binary_search_worker(arr, target, start, midpoint - 1)
+            else
+               return binary_search_worker(arr, target, midpoint + 1, end)
+      
+      
 13. Write a function in the language of your choice performs the query
     you wrote for question 7, and outputs the results as an HTML table.
+    import pyodbc
+    
+    def get_employees_and_managers():
+      html = "<table>"
+      con = pyodbc.connect('CONNECTION_STRING')
+		cur = con.cursor()
+		row = cur.execute("Select t1.name as employee_name, t2.name as manager_name from employee as t1 left outer join employee as t2 on t1.mgr_id = t2.id").fetchone()
+		
+		while row is not null:
+		   html += "<tr><td>" + row.employee_name + "</td><td>" + row.manager_name + "</td></tr>"
+		  
+		html += "</table>"
+		
+		return html
+		
+	Doing string manipulation to generate mark up makes me cringe.  A better language for this task would be something like Ng.
+			
+    
 14. Write a program in the language of your choice that takes a filename
     and a number N as arguments and retrieves and outputs the Nth line
     from the file.
+    
+    # I would just use grep if I was doing this in the console
+    import sys
+    
+    filename = sys.argv[1]
+    n = sys.argv[2]
+    
+    cur_line_num = 0
+    line_found = False
+    for l in open(filename).readlines():
+      if cur_line_num == n:
+         print(l)
+         line_found = True
+         break
+      cur_line_num += 1
+    if !line_found:
+      print("Line not found")
+    
 15. Write the function from question 12 in a different language.
 16. Write the program from question 14 in a different language (it can
     be the same language you used for #15, but it doesn't have to be).
